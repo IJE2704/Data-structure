@@ -7,15 +7,15 @@ public:
     int data;
     node *next;
 };
-void pushcl(node *start, int data)
+void pushcl(node **start, int data)
 {
     node *n = new node();
-    node *tmp = start;
     n->data = data;
-    n->next = start;
-    if (start != NULL)
+    n->next = *start;
+    if (*start != NULL)
     {
-        while (tmp->next != start)
+        node *tmp = *start;
+        while (tmp->next != *start)
         {
             tmp = tmp->next;
         }
@@ -25,7 +25,7 @@ void pushcl(node *start, int data)
     {
         n->next = n;
     }
-    start = n;
+    *start = n;
 }
 void print(node *start)
 {
@@ -44,9 +44,9 @@ int main()
 {
     node *start = NULL;
 
-    pushcl(start, 10);
-    pushcl(start, 20);
-    pushcl(start, 30);
+    pushcl(&start, 10);
+    pushcl(&start, 20);
+    pushcl(&start, 30);
 
     cout << "print list is : " << endl;
     print(start);
